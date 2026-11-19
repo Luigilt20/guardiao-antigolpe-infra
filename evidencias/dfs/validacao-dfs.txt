@@ -1,0 +1,33 @@
+$env:COMPUTERNAME = SRV-CITIZENTECH
+
+Name               InstallState
+----               ------------
+FS-DFS-Namespace      Installed
+FS-DFS-Replication    Installed
+
+
+PS> Get-DfsnRoot -Path \\citizentech.local\CitizenTechDFS
+
+Path                               Type      State
+----                               ----      -----
+\\citizentech.local\CitizenTechDFS Domain V2 Online
+
+
+PS> Get-DfsnRootTarget -Path \\citizentech.local\CitizenTechDFS
+
+Path                               TargetPath                                         State
+----                               ----------                                         -----
+\\citizentech.local\CitizenTechDFS \\SRV-CITIZENTECH.citizentech.local\CitizenTechDFS Online
+
+
+PS> Get-DfsnFolderTarget -Path \\citizentech.local\CitizenTechDFS\Atendimento
+
+Path                                           TargetPath                    State
+----                                           ----------                    -----
+\\citizentech.local\CitizenTechDFS\Atendimento \\SRV-CITIZENTECH\CitizenTech Online
+
+
+PS> Test-Path '\\citizentech.local\CitizenTechDFS\Atendimento\atendimento.txt'
+True
+PS> Get-Content $arquivo -TotalCount 1
+Guardiao Antigolpe - pasta de atendimento da equipe.

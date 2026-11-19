@@ -1,4 +1,4 @@
-# Roteiro de configuração da infraestrutura do Guardião Antigolpe
+# Roteiro de configuração da infraestrutura do Alethos
 
 ## Ambiente
 
@@ -23,6 +23,26 @@ Na mídia de apoio, coloque a pasta `site`, os arquivos de `laboratorio`, a past
 Para testar fora da VM, execute `dotnet run --project aplicacao/Guardiao.csproj --urls http://127.0.0.1:5080` e abra esse endereço. O primeiro acesso usa um banco vazio. Cadastre uma ocorrência fictícia, busque o ID exibido, altere o status e confira a alteração antes de excluir o registro.
 
 Depois de publicar o site e promover o domínio, execute `.\Configurar-Dominio.ps1` no PowerShell elevado da VM. O script cria a OU, a conta de demonstração, o grupo, a GPO e o compartilhamento. Para o laboratório isolado, habilita o RDP, mantém os direitos de logon existentes e acrescenta a conta de demonstração ao direito de logon pela Área de Trabalho Remota. A GPO da OU aplica NoControlPanel à sessão da usuária. O script também configura a zona reversa do laboratório e a auditoria. Defina a senha de demonstração diretamente na VM quando solicitado.
+
+## DFS opcional
+
+Após criar o compartilhamento SMB `CitizenTech`, execute os comandos em um PowerShell elevado. A raiz de domínio usa um compartilhamento próprio. A pasta `Atendimento` direciona o acesso ao compartilhamento de atendimento existente.
+
+```powershell
+Install-WindowsFeature -Name FS-DFS-Namespace,FS-DFS-Replication -IncludeManagementTools
+New-Item -Path 'C:\DFSRoots\CitizenTechDFS' -ItemType Directory -Force
+New-SmbShare -Name CitizenTechDFS -Path 'C:\DFSRoots\CitizenTechDFS' -FullAccess 'CITIZENTECH\Domain Admins' -ReadAccess 'CITIZENTECH\Domain Users'
+
+$raiz = '\\citizentech.local\CitizenTechDFS'
+New-DfsnRoot -Path $raiz -TargetPath '\\SRV-CITIZENTECH\CitizenTechDFS' -Type DomainV2
+New-DfsnFolder -Path "$raiz\Atendimento" -TargetPath '\\SRV-CITIZENTECH\CitizenTech'
+Get-DfsnRoot -Path $raiz
+Get-DfsnFolderTarget -Path "$raiz\Atendimento"
+Test-Path "$raiz\Atendimento\atendimento.txt"
+Get-Content "$raiz\Atendimento\atendimento.txt" -TotalCount 1
+```
+
+Capture o `Get-DfsnRoot` com o estado `Online` e o `Test-Path` com resultado `True`. A VM tem somente um servidor de namespace. [Criação de namespaces DFS no Windows Server](https://learn.microsoft.com/en-us/windows-server/storage/dfs-namespaces/create-a-dfs-namespace).
 
 ## Monitoramento e recuperação
 
