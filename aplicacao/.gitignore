@@ -1,0 +1,6 @@
+bin/
+obj/
+Dados/
+*.db
+*.db-shm
+*.db-wal

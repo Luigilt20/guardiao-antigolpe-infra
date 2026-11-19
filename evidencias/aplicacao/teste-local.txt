@@ -1,0 +1,6 @@
+Guardião Antigolpe — teste funcional da aplicação web
+18/11/2026 21:04 -0300
+Ambiente: publicação Release, Kestrel no host Linux, SQLite de teste.
+URL: http://127.0.0.1:17846/
+
+HTTP 200, folha de estilo, cadastro, busca por ID, atualização persistida e exclusão verificados.

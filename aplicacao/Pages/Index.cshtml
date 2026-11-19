@@ -1,0 +1,32 @@
+@page
+@model Antigolpe.Pages.IndexModel
+<!doctype html>
+<html lang="pt-BR">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Guardião Antigolpe</title><link rel="stylesheet" href="~/painel.css"></head>
+<body><header><div>CitizenTech</div></header>
+<main><h1>Guardião Antigolpe</h1>
+@if (Model.Aviso is { } aviso) { <p class="aviso" role="status">@aviso</p> }
+<section><h2>Registrar ocorrência</h2>
+<form method="post" asp-page-handler="Cadastrar">
+<label>Mensagem suspeita<textarea asp-for="Mensagem" required rows="2"></textarea></label>
+<div class="linha"><label>Classificação informada<select asp-for="Classificacao" required><option value="">Selecione</option>
+@foreach (var item in Antigolpe.Pages.IndexModel.Classificacoes) { <option>@item</option> }
+</select></label><label>Nível de risco<select asp-for="Risco" required><option value="">Selecione</option>
+@foreach (var item in Antigolpe.Pages.IndexModel.Riscos) { <option>@item</option> }
+</select></label></div>
+<label>Motivo da análise<input asp-for="Motivo"></label><button>Registrar</button></form></section>
+<section><h2>Consultar ocorrências</h2>
+<form method="get" class="busca"><label>Buscar por ID<input type="number" min="1" name="busca" value="@Request.Query["busca"]"></label><button>Buscar</button>
+@if (Request.Query.ContainsKey("busca")) { <a asp-page="/Index">Ver todas</a> }</form>
+@if (Model.Ocorrencias.Count == 0) { <p>Nenhuma ocorrência encontrada.</p> }
+@foreach (var o in Model.Ocorrencias) {
+<article><h3>Ocorrência #@o.Id</h3><small>@o.DataRegistro.ToString("dd/MM/yyyy HH:mm")</small>
+<p class="mensagem">@o.Mensagem</p><dl><dt>Classificação</dt><dd>@o.ClassificacaoIA</dd><dt>Risco</dt><dd>@o.NivelRisco</dd>
+@if (!string.IsNullOrWhiteSpace(o.MotivoAnalise)) { <dt>Motivo</dt><dd>@o.MotivoAnalise</dd> }</dl>
+<div class="acoes"><form method="post" asp-page-handler="Atualizar"><input type="hidden" name="id" value="@o.Id">
+<label>Status<select name="novoStatus">
+@foreach (var item in Antigolpe.Pages.IndexModel.Status) { <option selected="@(o.Status == item)">@item</option> }
+</select></label><button>Salvar status</button></form>
+<form method="post" asp-page-handler="Excluir" onsubmit="return confirm('Excluir esta ocorrência?')"><input type="hidden" name="id" value="@o.Id"><button class="excluir">Excluir</button></form></div></article>
+}</section></main></body></html>
