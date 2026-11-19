@@ -7,6 +7,10 @@ if (![System.Diagnostics.EventLog]::SourceExists('CitizenTechMonitor')) {
     New-EventLog -LogName Application -Source CitizenTechMonitor
 }
 & "$scripts\Configurar-PerfMon.ps1"
+$acaoInicio = New-ScheduledTaskAction -Execute "$PSHOME\powershell.exe" -Argument ('-NoProfile -NonInteractive -File "{0}\Configurar-PerfMon.ps1"' -f $scripts)
+$aoIniciar = New-ScheduledTaskTrigger -AtStartup
+$aoIniciar.Delay = 'PT1M'
+Register-ScheduledTask -TaskName 'CitizenTech_Iniciar_PerfMon' -Action $acaoInicio -Trigger $aoIniciar -User SYSTEM -RunLevel Highest -Force | Out-Null
 $inicio = (Get-Date).AddMinutes(1)
 $principal = New-ScheduledTaskPrincipal -UserId SYSTEM -LogonType ServiceAccount -RunLevel Highest
 $opcoes = New-ScheduledTaskSettingsSet -StartWhenAvailable -MultipleInstances IgnoreNew

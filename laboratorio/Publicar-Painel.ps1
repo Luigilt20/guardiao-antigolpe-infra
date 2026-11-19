@@ -41,6 +41,10 @@ if ($LASTEXITCODE) { throw 'Falha na permissao do banco.' }
 if (!(Get-Website -Name $site)) {
     New-Website -Name $site -Port 80 -IPAddress '10.0.2.10' -PhysicalPath $raiz -ApplicationPool $pool | Out-Null
 }
+$nomeDns = 'srv-citizentech.citizentech.local'
+if (!(Get-WebBinding -Name $site -Protocol http -Port 80 -HostHeader $nomeDns)) {
+    New-WebBinding -Name $site -Protocol http -IPAddress '*' -Port 80 -HostHeader $nomeDns
+}
 if ((Get-WebAppPoolState $pool).Value -ne 'Started') { Start-WebAppPool $pool }
 Start-Website $site
 Get-Website -Name $site | Format-List Name,State,PhysicalPath,ApplicationPool,Bindings

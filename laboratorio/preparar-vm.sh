@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 nome='Guardiao-Antigolpe'
+bridge="${BRIDGE_LAB:-br-guardiao}"
 pasta_vms="$HOME/VirtualBox VMs"
 disco="$pasta_vms/$nome/Servidor.vdi"
 arquivo='/mnt/discoooolol'
@@ -20,8 +21,12 @@ if [[ -n ${ISO_APLICACAO:-} && ! -r $ISO_APLICACAO ]]; then
     echo 'Confira ISO_APLICACAO.' >&2
     exit 1
 fi
+if ! ip link show dev "$bridge" >/dev/null 2>&1; then
+    echo "Ative a interface do laboratorio ou indique seu nome em BRIDGE_LAB." >&2
+    exit 1
+fi
 VBoxManage createvm --name "$nome" --ostype Windows2022_64 --basefolder "$pasta_vms" --register
-VBoxManage modifyvm "$nome" --memory 4096 --cpus 2 --ioapic on --graphicscontroller vboxsvga --vram 64 --nic1 nat --boot1 disk --boot2 dvd
+VBoxManage modifyvm "$nome" --memory 4096 --cpus 2 --ioapic on --graphicscontroller vboxsvga --vram 64 --nic1 bridged --bridgeadapter1 "$bridge" --boot1 disk --boot2 dvd
 VBoxManage storagectl "$nome" --name SATA --add sata --controller IntelAhci --hostiocache on
 VBoxManage createmedium disk --filename "$disco" --size 61440 --format VDI
 VBoxManage storageattach "$nome" --storagectl SATA --port 0 --device 0 --type hdd --medium "$disco"
@@ -29,4 +34,3 @@ VBoxManage storageattach "$nome" --storagectl SATA --port 1 --device 0 --type dv
 if [[ -n ${ISO_APLICACAO:-} ]]; then
     VBoxManage storageattach "$nome" --storagectl SATA --port 2 --device 0 --type dvddrive --medium "$ISO_APLICACAO"
 fi
-VBoxManage modifyvm "$nome" --natpf1 'painel,tcp,127.0.0.1,18081,10.0.2.10,80'

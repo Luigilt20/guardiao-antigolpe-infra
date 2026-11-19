@@ -1,0 +1,17 @@
+Cliente Linux da equipe
+
+$ dig @10.0.2.10 srv-citizentech.citizentech.local A +short
+10.0.2.10
+
+HTTP GET http://srv-citizentech.citizentech.local/
+HTTP 200 | Conteúdo do painel Guardião Antigolpe confirmado.
+
+$ smbclient //SRV-CITIZENTECH/CitizenTech -U CITIZENTECH/ana.souza
+smb: listar arquivos e ler atendimento.txt
+Guardiao Antigolpe - pasta de atendimento da equipe.
+  .                                   D        0  Wed Nov 18 22:09:58 2026
+  ..                                  D        0  Wed Nov 18 22:03:28 2026
+  atendimento.txt                     A       54  Wed Nov 18 22:03:58 2026
+  verificacao.txt                     A     8680  Wed Nov 18 22:09:15 2026
+
+		15568127 blocks of size 4096. 12587525 blocks available

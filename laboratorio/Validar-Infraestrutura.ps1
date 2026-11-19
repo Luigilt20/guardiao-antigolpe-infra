@@ -10,7 +10,7 @@ Start-Transcript -Path $arquivo
 try {
     hostname.exe
     ipconfig.exe /all
-    nslookup.exe $nome
+    nslookup.exe $nome 10.0.2.10
     Test-NetConnection -ComputerName $nome -Port 80 | Format-List ComputerName,RemoteAddress,RemotePort,TcpTestSucceeded
     Get-ADDomain | Format-Table Name,DNSRoot,DomainMode
     Get-DnsServerZone | Format-Table ZoneName,ZoneType

@@ -1,0 +1,269 @@
+**********************
+Windows PowerShell transcript start
+Start time: 20261118220913
+Username: CITIZENTECH\Administrator
+RunAs User: CITIZENTECH\Administrator
+Configuration Name:
+Machine: SRV-CITIZENTECH (Microsoft Windows NT 10.0.20348.0)
+Host Application: C:\Windows\system32\WindowsPowerShell\v1.0\PowerShell.exe -NoExit -ExecutionPolicy RemoteSigned -File E:\Configurar-Dominio.ps1
+Process ID: 6092
+PSVersion: 5.1.20348.558
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.20348.558
+BuildVersion: 10.0.20348.558
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+Transcript started, output file is C:\ProgramData\CitizenTech\Evidencias\Verificacao-20261118-220913.txt
+SRV-CITIZENTECH
+
+Windows IP Configuration
+
+   Host Name . . . . . . . . . . . . : SRV-CITIZENTECH
+   Primary Dns Suffix  . . . . . . . : citizentech.local
+   Node Type . . . . . . . . . . . . : Hybrid
+   IP Routing Enabled. . . . . . . . : No
+   WINS Proxy Enabled. . . . . . . . : No
+   DNS Suffix Search List. . . . . . : citizentech.local
+
+Ethernet adapter Ethernet:
+
+   Connection-specific DNS Suffix  . :
+   Description . . . . . . . . . . . : Intel(R) PRO/1000 MT Desktop Adapter
+   Physical Address. . . . . . . . . : 08-00-27-D2-D0-51
+   DHCP Enabled. . . . . . . . . . . : No
+   Autoconfiguration Enabled . . . . : Yes
+   Link-local IPv6 Address . . . . . : fe80::1890:50b3:4678:73ec%4(Preferred)
+   IPv4 Address. . . . . . . . . . . : 10.0.2.10(Preferred)
+   Subnet Mask . . . . . . . . . . . : 255.255.255.0
+   Default Gateway . . . . . . . . . : 10.0.2.2
+   DHCPv6 IAID . . . . . . . . . . . : 101187623
+   DHCPv6 Client DUID. . . . . . . . : 00-01-00-01-32-90-3B-BB-08-00-27-D2-D0-51
+   DNS Servers . . . . . . . . . . . : ::1
+                                       10.0.2.10
+   NetBIOS over Tcpip. . . . . . . . : Enabled
+Server:  srv-citizentech.citizentech.local
+Address:  10.0.2.10
+
+Name:    srv-citizentech.citizentech.local
+Address:  10.0.2.10
+
+
+
+
+ComputerName     : srv-citizentech.citizentech.local
+RemoteAddress    : fe80::1890:50b3:4678:73ec%4
+RemotePort       : 80
+TcpTestSucceeded : True
+
+
+
+
+Name        DNSRoot                  DomainMode
+----        -------                  ----------
+citizentech citizentech.local Windows2016Domain
+
+
+
+ZoneName                 ZoneType
+--------                 --------
+_msdcs.citizentech.local Primary
+0.in-addr.arpa           Primary
+127.in-addr.arpa         Primary
+2.0.10.in-addr.arpa      Primary
+255.in-addr.arpa         Primary
+citizentech.local        Primary
+
+
+
+Name      SamAccountName
+----      --------------
+Ana Souza ana.souza
+
+
+
+Name               InstallState
+----               ------------
+AD-Domain-Services    Installed
+DNS                   Installed
+FS-FileServer         Installed
+Web-Server            Installed
+
+
+
+
+name            : CitizenTech
+state           : Started
+physicalPath    : C:\inetpub\citizentech
+applicationPool : CitizenTechPool
+bindings        : Microsoft.IIs.PowerShell.Framework.ConfigurationElement
+
+
+
+
+Value
+-----
+Started
+
+
+
+Name   Status
+----   ------
+DNS   Running
+W3SVC Running
+
+
+
+Name        Path
+----        ----
+CitizenTech C:\Shares\CitizenTech
+
+
+
+AccountName                       AccessRight
+-----------                       -----------
+CITIZENTECH\GG_CitizenTech_Admins        Full
+CITIZENTECH\Domain Users                 Read
+
+
+
+
+DisplayName : GPO_CitizenTech_Usuarios
+GpoStatus   : AllSettingsEnabled
+
+
+
+
+
+GpoLinks : {GPO_CitizenTech_Usuarios}
+
+
+
+
+IdentityReference                      FileSystemRights
+-----------------                      ----------------
+IIS APPPOOL\CitizenTechPool ReadAndExecute, Synchronize
+NT SERVICE\TrustedInstaller                 FullControl
+NT SERVICE\TrustedInstaller                   268435456
+NT AUTHORITY\SYSTEM                         FullControl
+NT AUTHORITY\SYSTEM                           268435456
+BUILTIN\Administrators                      FullControl
+BUILTIN\Administrators                        268435456
+BUILTIN\Users               ReadAndExecute, Synchronize
+BUILTIN\Users                               -1610612736
+CREATOR OWNER                                 268435456
+
+
+
+IdentityReference                      FileSystemRights
+-----------------                      ----------------
+IIS APPPOOL\CitizenTechPool         Modify, Synchronize
+NT AUTHORITY\SYSTEM                         FullControl
+BUILTIN\Administrators                      FullControl
+CREATOR OWNER                                 268435456
+BUILTIN\Users               ReadAndExecute, Synchronize
+BUILTIN\Users                                     Write
+
+
+
+TaskName                      State
+--------                      -----
+CitizenTech_Iniciar_PerfMon   Ready
+CitizenTech_Monitor_Alertas   Ready
+CitizenTech_Recuperacao       Ready
+CitizenTech_Limiares        Running
+CitizenTech_Monitor         Running
+
+
+
+Name:                 CitizenTech_Monitor
+Status:               Running
+Root Path:            C:\PerfLogs\CitizenTech\
+Segment:              Off
+Schedules:            On
+Segment Max Size:     64 MB
+Run as:               SYSTEM
+
+Name:                 CitizenTech_Monitor\CitizenTech_Monitor
+Type:                 Counter
+Output Location:      C:\PerfLogs\CitizenTech\Recursos_000002.blg
+Append:               Off
+Circular:             On
+Overwrite:            Off
+Sample Interval:      15 second(s)
+
+Counters:
+  \Processor(_Total)\% Processor Time
+  \Memory\Available MBytes
+  \LogicalDisk(C:)\Free Megabytes
+
+The command completed successfully.
+
+Name:                 CitizenTech_Limiares
+Status:               Running
+Root Path:            %systemdrive%\PerfLogs\Admin
+Segment:              Off
+Schedules:            On
+Run as:               SYSTEM
+
+Name:                 CitizenTech_Limiares\CitizenTech_Limiares
+Type:                 Alert
+Sample Interval:      15 second(s)
+Event Log:            On
+
+Thresholds:
+  \Processor(_Total)\% Processor Time>80
+  \Memory\Available MBytes<500
+  \LogicalDisk(C:)\Free Megabytes<15360
+
+The command completed successfully.
+[SC] QueryServiceConfig2 SUCCESS
+
+SERVICE_NAME: W3SVC
+        RESET_PERIOD (in seconds)    : 86400
+        REBOOT_MESSAGE               :
+        COMMAND_LINE                 :
+        FAILURE_ACTIONS              : RESTART -- Delay = 5000 milliseconds.
+                                       RESTART -- Delay = 10000 milliseconds.
+                                       RESTART -- Delay = 30000 milliseconds.
+System audit policy
+Category/Subcategory                      Setting
+Logon/Logoff
+  Logon                                   Success and Failure
+System audit policy
+Category/Subcategory                      Setting
+Object Access
+  File System                             Success and Failure
+
+TimeCreated              Id ProviderName
+-----------              -- ------------
+11/18/2026 10:09:13 PM 4624 Microsoft-Windows-Security-Auditing
+11/18/2026 10:09:08 PM 4624 Microsoft-Windows-Security-Auditing
+11/18/2026 10:09:08 PM 4663 Microsoft-Windows-Security-Auditing
+11/18/2026 10:09:08 PM 4663 Microsoft-Windows-Security-Auditing
+11/18/2026 10:09:08 PM 4663 Microsoft-Windows-Security-Auditing
+11/18/2026 10:09:08 PM 4663 Microsoft-Windows-Security-Auditing
+
+
+
+
+TimeCreated : 11/18/2026 10:09:13 PM
+Id          : 9001
+Message     : 2026-11-18 22:09:13 | ALERTA: RAM abaixo do limite | CPU 0.0% | RAM livre 2,331 MB
+              | Disco C: livre 48.02 GB
+
+
+
+Guardiao Antigolpe HTTP 200
+Ok.
+2026-11-19 01:06:04 fe80::1890:50b3:4678:73ec%4 GET / - 80 - fe80::1890:50b3:4678:73ec%4 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200 0 0 90
+2026-11-19 01:06:43 10.0.2.10 GET / - 80 - 10.0.2.10 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200 0 0 23
+2026-11-19 01:07:43 10.0.2.10 GET / - 80 - 10.0.2.10 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200 0 0 19
+2026-11-19 01:08:43 10.0.2.10 GET / - 80 - 10.0.2.10 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200 0 0 18
+2026-11-19 01:09:15 fe80::1890:50b3:4678:73ec%4 GET / - 80 - fe80::1890:50b3:4678:73ec%4 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200 0 0 19
+**********************
+Windows PowerShell transcript end
+End time: 20261118220915
+**********************
