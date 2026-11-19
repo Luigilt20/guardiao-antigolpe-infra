@@ -1,6 +1,6 @@
-# Ficha da CitizenTech
+# Ficha da CitizenTech | Alethos: guardião antigolpe
 
-O Guardião Antigolpe ajuda pessoas idosas a pedir orientação quando recebem mensagens suspeitas. No painel, o operador registra a mensagem, informa a classificação, o nível de risco e o motivo, e acompanha o atendimento pelo número da ocorrência. A demonstração usa um pedido fictício de Pix antecipado.
+O Alethos ajuda pessoas idosas a pedir orientação quando recebem mensagens suspeitas. No painel, o operador registra a mensagem, informa a classificação, o nível de risco e o motivo, e acompanha o atendimento pelo número da ocorrência. A demonstração usa um pedido fictício de Pix antecipado.
 
 | Item | Configuração |
 | --- | --- |
@@ -13,8 +13,8 @@ O Guardião Antigolpe ajuda pessoas idosas a pedir orientação quando recebem m
 
 ## Integrantes da equipe
 
-- Witalon — RM 559023
-- Alexandre Colvet — RM 560059
-- Enzo Luciano — RM 559557
-- Pedro Scarceli — RM 561023
-- Luigi Thiengo — RM 560755
+- Witalon Antonio Rodrigues — RM 559023
+- Alexandre Colvet Delfino — RM 560059
+- Enzo Luciano Barros de Oliveira — RM 559557
+- Pedro Claudino Scarceli — RM 561023
+- Luigi Thiengo Pires — RM 560755

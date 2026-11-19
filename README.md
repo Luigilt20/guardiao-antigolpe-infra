@@ -1,16 +1,16 @@
-# Guardião Antigolpe | Operating Systems
+# Alethos: guardião antigolpe | Operating Systems
 
 ## Integrantes da equipe
 
-- Witalon — RM 559023
-- Alexandre Colvet — RM 560059
-- Enzo Luciano — RM 559557
-- Pedro Scarceli — RM 561023
-- Luigi Thiengo — RM 560755
+- Witalon Antonio Rodrigues — RM 559023
+- Alexandre Colvet Delfino — RM 560059
+- Enzo Luciano Barros de Oliveira — RM 559557
+- Pedro Claudino Scarceli — RM 561023
+- Luigi Thiengo Pires — RM 560755
 
 ## Ficha da CitizenTech
 
-O Guardião Antigolpe atende pessoas idosas que recebem mensagens suspeitas. O botão de ajuda da solução envia um pedido via MQTT. No painel, o operador registra a mensagem recebida, informa a classificação e o risco e acompanha a ocorrência pelo número de atendimento.
+O Alethos atende pessoas idosas que recebem mensagens suspeitas. O botão de ajuda da solução envia um pedido via MQTT. No painel, o operador registra a mensagem recebida, informa a classificação e o risco e acompanha a ocorrência pelo número de atendimento.
 
 Para a disciplina de Operating Systems, adaptamos o console em C# do grupo para o navegador. A versão web conserva o modelo de ocorrências, o serviço de cadastro e consulta e as migrações do banco SQLite. O formulário permite cadastrar uma ocorrência, consultar por ID, alterar o status e excluir o registro. [Console de origem](https://github.com/alecolvet/Antigolpe-PainelDeProtecao/tree/00951b3189554c9638fbea1b6d456a84e3de3c9c) · [Código da aplicação web](aplicacao)
 
