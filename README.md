@@ -1,5 +1,13 @@
 # Guardião Antigolpe | Operating Systems
 
+## Integrantes da equipe
+
+- Witalon — RM 559023
+- Alexandre Colvet — RM 560059
+- Enzo Luciano — RM 559557
+- Pedro Scarceli — RM 561023
+- Luigi Thiengo — RM 560755
+
 ## Ficha da CitizenTech
 
 O Guardião Antigolpe atende pessoas idosas que recebem mensagens suspeitas. O botão de ajuda da solução envia um pedido via MQTT. No painel, o operador registra a mensagem recebida, informa a classificação e o risco e acompanha a ocorrência pelo número de atendimento.

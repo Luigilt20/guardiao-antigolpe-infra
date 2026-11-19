@@ -10,3 +10,11 @@ O Guardião Antigolpe ajuda pessoas idosas a pedir orientação quando recebem m
 | Domínio do laboratório | `citizentech.local` |
 | Conta utilizada nos testes de usuário | `CITIZENTECH\ana.souza` |
 | Critérios e resultados dos testes | [Tabela de evidências no README](../README.md#critérios-e-evidências) |
+
+## Integrantes da equipe
+
+- Witalon — RM 559023
+- Alexandre Colvet — RM 560059
+- Enzo Luciano — RM 559557
+- Pedro Scarceli — RM 561023
+- Luigi Thiengo — RM 560755
