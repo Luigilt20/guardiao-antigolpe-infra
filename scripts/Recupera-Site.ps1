@@ -9,10 +9,11 @@ param(
 
     [string]$Site = 'CitizenTech',
     [string]$Pool = 'CitizenTechPool',
-    [string]$Log = "$PSScriptRoot\logs\recuperacao.log"
+    [string]$Log
 )
 
 $ErrorActionPreference = 'Stop'
+if (!$Log) { $Log = Join-Path $PSScriptRoot 'logs\recuperacao.log' }
 $arquivo = [System.IO.Path]::GetFullPath($Log)
 New-Item -ItemType Directory -Path (Split-Path -Parent $arquivo) -Force | Out-Null
 

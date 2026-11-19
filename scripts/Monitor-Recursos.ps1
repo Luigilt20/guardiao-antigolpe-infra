@@ -10,10 +10,11 @@ param(
     [ValidateRange(0, 2147483647)]
     [double]$LimiteDiscoGB = 15,
 
-    [string]$Log = "$PSScriptRoot\logs\alertas.log"
+    [string]$Log
 )
 
 $ErrorActionPreference = 'Stop'
+if (!$Log) { $Log = Join-Path $PSScriptRoot 'logs\alertas.log' }
 $fonte = 'CitizenTechMonitor'
 $cpu = Get-CimInstance Win32_PerfFormattedData_PerfOS_Processor -Filter "Name='_Total'"
 $sistema = Get-CimInstance Win32_OperatingSystem

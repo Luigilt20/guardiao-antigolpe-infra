@@ -63,13 +63,14 @@ else {
 $parada = [Diagnostics.Stopwatch]::StartNew()
 do {
     $estado = ConsultarAlvo
-    if ($estado -eq 'Stopped') { break }
-    Start-Sleep -Milliseconds 200
-} while ($parada.Elapsed.TotalSeconds -lt 5)
-if ($estado -ne 'Stopped' -or (TestarAplicacao)) {
+    $indisponivel = $estado -in @('Stopping', 'StopPending', 'Stopped') -and -not (TestarAplicacao)
+    if ($indisponivel) { break }
+    Start-Sleep -Milliseconds 250
+} while ($parada.Elapsed.TotalSeconds -lt 15)
+if (-not $indisponivel) {
     throw 'A indisponibilidade nao foi observada. Repita logo apos a proxima rodada da tarefa.'
 }
-Write-Output "$(Get-Date -Format HH:mm:ss) [3/5] $Alvo Stopped. Aplicacao indisponivel."
+Write-Output "$(Get-Date -Format HH:mm:ss) [3/5] $Alvo $estado. Aplicacao indisponivel."
 Write-Output "$(Get-Date -Format HH:mm:ss) [4/5] Aguardando a tarefa agendada."
 $cronometro = [System.Diagnostics.Stopwatch]::StartNew()
 do {

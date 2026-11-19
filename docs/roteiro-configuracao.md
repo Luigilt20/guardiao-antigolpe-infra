@@ -77,7 +77,7 @@ Confira o histórico da tarefa e uma linha `OK HTTP 200` em `logs\recuperacao.lo
 Get-Content "$scripts\logs\recuperacao.log" -Tail 12
 ```
 
-O resultado esperado é observar o alvo parado, a aplicação temporariamente indisponível e o retorno da resposta correta pelo agendamento. A configuração consultada por `sc.exe qfailure` cobre falhas do serviço. A parada controlada do teste é recuperada pela tarefa. Capture o terminal e o log com os horários correspondentes. [Gatilhos no Agendador de Tarefas](https://learn.microsoft.com/en-us/powershell/module/scheduledtasks/new-scheduledtasktrigger).
+Durante a parada, o Windows pode informar `Stopping` antes de chegar a `Stopped`. O teste verifica a indisponibilidade por HTTP e depois exige tanto o estado operacional quanto o conteúdo correto da aplicação. Nesta VM, a espera até o HTTP 200 foi de 57 s após a indisponibilidade observada do serviço e de 37 s no teste separado do pool. A configuração consultada por `sc.exe qfailure` cobre falhas do serviço. A parada controlada do teste é recuperada pela tarefa. Capture o terminal e o log com os horários correspondentes. [Gatilhos no Agendador de Tarefas](https://learn.microsoft.com/en-us/powershell/module/scheduledtasks/new-scheduledtasktrigger).
 
 ## Evidências e vídeo
 

@@ -1,0 +1,60 @@
+
+Name:                 CitizenTech_Monitor
+Status:               Running
+Root Path:            C:\PerfLogs\CitizenTech\
+Segment:              Off
+Schedules:            On
+Segment Max Size:     64 MB
+Run as:               SYSTEM
+
+Name:                 CitizenTech_Monitor\CitizenTech_Monitor
+Type:                 Counter
+Output Location:      C:\PerfLogs\CitizenTech\Recursos_000001.blg
+Append:               Off
+Circular:             On
+Overwrite:            Off
+Sample Interval:      15 second(s)
+
+Counters:
+  \Processor(_Total)\% Processor Time
+  \Memory\Available MBytes
+  \LogicalDisk(C:)\Free Megabytes
+
+The command completed successfully.
+
+Name:                 CitizenTech_Limiares
+Status:               Running
+Root Path:            %systemdrive%\PerfLogs\Admin
+Segment:              Off
+Schedules:            On
+Run as:               SYSTEM
+
+Name:                 CitizenTech_Limiares\CitizenTech_Limiares
+Type:                 Alert
+Sample Interval:      15 second(s)
+Event Log:            On
+
+Thresholds:
+  \Processor(_Total)\% Processor Time>80
+  \Memory\Available MBytes<500
+  \LogicalDisk(C:)\Free Megabytes<15360
+
+The command completed successfully.
+
+TaskName                      State
+--------                      -----
+CitizenTech_Monitor_Alertas   Ready
+CitizenTech_Recuperacao       Ready
+CitizenTech_Limiares        Running
+CitizenTech_Monitor         Running
+
+
+
+
+TimeCreated : 11/18/2026 4:30:47 PM
+Id          : 9001
+Message     : 2026-11-18 21:30:47 | ALERTA: CPU acima do limite | CPU 97.0% | RAM livre 2,515 MB | Disco C: livre 48.72 GB
+
+TimeCreated : 11/18/2026 4:24:44 PM
+Id          : 9001
+Message     : 2026-11-18 16:24:43 | ALERTA: RAM abaixo do limite | CPU 0.0% | RAM livre 2,655 MB | Disco C: livre 48.85 GB

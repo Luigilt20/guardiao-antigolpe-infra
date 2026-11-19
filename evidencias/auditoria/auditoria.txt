@@ -1,0 +1,27 @@
+System audit policy
+
+Category/Subcategory                      Setting
+Logon/Logoff
+  Logon                                   Success and Failure
+
+System audit policy
+
+Category/Subcategory                      Setting
+Object Access
+  File System                             Success and Failure
+
+
+TimeCreated             Id ProviderName
+-----------             -- ------------
+11/18/2026 9:34:05 PM 4663 Microsoft-Windows-Security-Auditing
+11/18/2026 9:34:05 PM 4663 Microsoft-Windows-Security-Auditing
+11/18/2026 9:34:05 PM 4663 Microsoft-Windows-Security-Auditing
+11/18/2026 9:34:00 PM 4663 Microsoft-Windows-Security-Auditing
+
+
+C:\inetpub\logs\LogFiles\W3SVC2\u_ex261119.log
+
+2026-11-19 00:33:43 10.0.2.10 GET / - 80 - 10.0.2.10 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200
+0 0 80
+2026-11-19 00:34:17 10.0.2.10 GET / - 80 - 10.0.2.10 Mozilla/5.0+(Windows+NT;+Windows+NT+10.0;+en-US)+WindowsPowerShell/5.1.20348.558 - 200
+0 0 18

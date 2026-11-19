@@ -8,7 +8,9 @@ Para a disciplina de Operating Systems, adaptamos o console em C# do grupo para 
 
 ## Demonstração do painel
 
-O vídeo legendado acompanha uma ocorrência fictícia desde o registro de uma tentativa de golpe por Pix até sua exclusão. A gravação mostra a aplicação executando localmente com ASP.NET Core e SQLite. [Assistir ou baixar a demonstração em MP4](evidencias/aplicacao/painel-de-ocorrencias.mp4) · [Resultado do teste HTTP](evidencias/aplicacao/teste-local.txt)
+O vídeo legendado mostra o servidor da equipe e, no navegador, uma ocorrência fictícia de golpe por Pix. O navegador do host acessa o IIS da VM pela porta encaminhada pelo VirtualBox. [Demonstração do Windows Server e do painel (MP4)](evidencias/demonstracao-do-servidor.mp4)
+
+O painel também passou por um teste de cadastro, busca, atualização e exclusão no host. [Teste HTTP local](evidencias/aplicacao/teste-local.txt)
 
 Para reproduzir o teste, execute o comando na raiz do repositório com o SDK .NET 10 e abra `http://127.0.0.1:5080/`. As migrações criam o banco no primeiro início.
 
@@ -18,27 +20,25 @@ dotnet run --project aplicacao/Guardiao.csproj --urls http://127.0.0.1:5080
 
 ## Ambiente de hospedagem
 
-A VM `Guardiao-Antigolpe` usa VirtualBox, Windows Server 2022 Standard Evaluation com Desktop Experience, 2 vCPUs, 4 GB de RAM e disco virtual de 60 GiB no NVMe. A primeira instalação apresentou erros de NTFS. Na VM substituta, a configuração inicial do Administrator precede os testes abaixo.
+A VM `Guardiao-Antigolpe` usa VirtualBox, Windows Server 2022 Standard Evaluation com Desktop Experience, 2 vCPUs, 4 GB de RAM e disco virtual de 60 GiB no NVMe. O site e o pool estão em execução. Os testes abaixo foram realizados em 18/11/2026.
 
-| Componente | Configuração prevista nos scripts |
+| Componente | Configuração do laboratório |
 | --- | --- |
-| Rede e identidade | Servidor `SRV-CITIZENTECH`, domínio `citizentech.local`, IPv4 `10.0.2.10/24`, gateway `10.0.2.2` e DNS `10.0.2.10` |
+| Rede e identidade | Servidor `SRV-CITIZENTECH`, domínio previsto `citizentech.local`, IPv4 `10.0.2.10/24`, gateway `10.0.2.2` e DNS `10.0.2.10` |
 | Hospedagem com runtime (Caminho B) | IIS com ASP.NET Core 10 Hosting Bundle, site `CitizenTech` e pool `CitizenTechPool` |
 | Acesso ao site | Na VM, `http://10.0.2.10/`. No host, `http://127.0.0.1:18081/` por encaminhamento NAT |
 | Arquivos e permissões | Aplicação em `C:\inetpub\citizentech` com leitura e execução para o pool. Banco em `C:\ProgramData\GuardiaoAntigolpe\Dados` com permissão de modificação |
-| Conta de teste do domínio | `CITIZENTECH\ana.souza`, integrante de `GG_CitizenTech_Admins`. A senha é definida dentro da VM |
+| Conta de teste prevista no domínio | `CITIZENTECH\ana.souza`, integrante de `GG_CitizenTech_Admins`. A senha é definida dentro da VM |
 
 O roteiro detalha a ordem de instalação do AD DS, DNS e IIS, a configuração da GPO, do compartilhamento e do acesso remoto, além dos comandos para capturar as evidências. [Roteiro de configuração](docs/roteiro-configuracao.md)
 
 ## Critérios e evidências
 
-O teste HTTP e o vídeo acima verificam o fluxo da aplicação no host. A tabela indica o que falta demonstrar dentro do Windows Server.
-
-| Critério | Pontos | Evidência a coletar na VM |
+| Critério | Pontos | Resultado e evidência |
 | --- | ---: | --- |
-| Rede e identidade | 2 | IP fixo em `ipconfig /all`, resolução do hostname em `nslookup`, domínio e zona DNS |
-| Aplicação no IIS | 2 | Site e pool iniciados, ACL da pasta e operação do painel no navegador |
-| Monitoramento | 2 | Contadores de CPU, memória e disco ativos no PerfMon e evento de alerta |
-| Recuperação automática | 1 | Parada controlada de W3SVC e do pool, indisponibilidade observada e retorno do painel com HTTP 200 |
-| Logs e auditoria | 1 | Política de auditoria, evento de segurança e requisição registrada no log do IIS |
-| Funcionamento completo | 2 | Saída da validação integrada e vídeo de até 7 minutos mostrando a infraestrutura, a falha e a aplicação no IIS |
+| Rede e identidade | 2 | Hostname `SRV-CITIZENTECH`, DHCP desabilitado, IP fixo e DNS `10.0.2.10`. Validação do domínio pendente. [ipconfig](evidencias/rede/ipconfig.png) · [Saída do PowerShell](evidencias/rede/rede.txt) |
+| Aplicação no IIS | 2 | Site e pool iniciados, HTTP 200, acesso de leitura e execução no site e de modificação no banco. [Ocorrência no navegador](evidencias/iis/ocorrencia-no-navegador.png) · [Site e pool](evidencias/iis/site-e-pool.png) · [Permissões NTFS](evidencias/iis/permissoes.png) · [Saída do servidor](evidencias/iis/web.txt) |
+| Monitoramento | 2 | Coleta a cada 15 s. O evento 9001 registrou uso de CPU de 97%. O teste de memória também gerou um alerta ao elevar temporariamente o limite. [PerfMon e tarefas](evidencias/monitoramento/limiares-e-agendamento.png) · [Contadores e eventos](evidencias/monitoramento/monitor.txt) |
+| Recuperação automática | 1 | Após a parada do W3SVC, o teste observou a indisponibilidade e o HTTP 200 retornou após 57 s de espera. No teste separado do pool, a aplicação voltou a responder após 37 s. [Teste do serviço](evidencias/recuperacao/servico-restabelecido.png) · [Teste do pool](evidencias/recuperacao/teste-do-pool.png) · [Histórico da recuperação](evidencias/recuperacao/falhas.txt) |
+| Logs e auditoria | 1 | Auditoria de logon e de arquivos habilitada para sucesso e falha. O evento 4663 registrou acesso a arquivos, e o log W3C do IIS registrou requisições GET com código 200. [Tela do servidor](evidencias/auditoria/eventos-e-iis.png) · [Saída de auditoria e HTTP](evidencias/auditoria/auditoria.txt) |
+| Funcionamento completo | 2 | Cadastro, busca, atualização e exclusão executados pelo navegador no IIS. Verificação integrada do domínio, da GPO e do compartilhamento pendente. [Vídeo legendado](evidencias/demonstracao-do-servidor.mp4) |

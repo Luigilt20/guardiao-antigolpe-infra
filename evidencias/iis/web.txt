@@ -1,0 +1,51 @@
+
+Name               InstallState
+----               ------------
+AD-Domain-Services    Installed
+DNS                   Installed
+FS-FileServer         Installed
+Web-Server            Installed
+
+
+
+
+name            : CitizenTech
+state           : Started
+physicalPath    : C:\inetpub\citizentech
+applicationPool : CitizenTechPool
+
+
+
+
+Value
+-----
+Started
+
+
+
+protocol bindingInformation
+-------- ------------------
+http     10.0.2.10:80:
+
+
+C:\inetpub\citizentech IIS APPPOOL\CitizenTechPool:(OI)(CI)(RX)
+                       NT SERVICE\TrustedInstaller:(I)(F)
+                       NT SERVICE\TrustedInstaller:(I)(OI)(CI)(IO)(F)
+                       NT AUTHORITY\SYSTEM:(I)(F)
+                       NT AUTHORITY\SYSTEM:(I)(OI)(CI)(IO)(F)
+                       BUILTIN\Administrators:(I)(F)
+                       BUILTIN\Administrators:(I)(OI)(CI)(IO)(F)
+                       BUILTIN\Users:(I)(RX)
+                       BUILTIN\Users:(I)(OI)(CI)(IO)(GR,GE)
+                       CREATOR OWNER:(I)(OI)(CI)(IO)(F)
+
+Successfully processed 1 files; Failed processing 0 files
+C:\ProgramData\GuardiaoAntigolpe\Dados IIS APPPOOL\CitizenTechPool:(OI)(CI)(M)
+                                       NT AUTHORITY\SYSTEM:(I)(OI)(CI)(F)
+                                       BUILTIN\Administrators:(I)(OI)(CI)(F)
+                                       CREATOR OWNER:(I)(OI)(CI)(IO)(F)
+                                       BUILTIN\Users:(I)(OI)(CI)(RX)
+                                       BUILTIN\Users:(I)(CI)(WD,AD,WEA,WA)
+
+Successfully processed 1 files; Failed processing 0 files
+200

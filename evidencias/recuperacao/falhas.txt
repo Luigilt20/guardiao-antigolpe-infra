@@ -1,0 +1,21 @@
+[SC] QueryServiceConfig2 SUCCESS
+
+SERVICE_NAME: W3SVC
+        RESET_PERIOD (in seconds)    : 86400
+        REBOOT_MESSAGE               :
+        COMMAND_LINE                 :
+        FAILURE_ACTIONS              : RESTART -- Delay = 5000 milliseconds.
+                                       RESTART -- Delay = 10000 milliseconds.
+                                       RESTART -- Delay = 30000 milliseconds.
+
+2026-11-18 21:25:44 | Iniciando W3SVC.
+2026-11-18 21:25:47 | FALHA | Failed to start service 'World Wide Web Publishing Service (W3SVC)'.
+2026-11-18 21:26:44 | Iniciando W3SVC.
+2026-11-18 21:26:46 | FALHA | Failed to start service 'World Wide Web Publishing Service (W3SVC)'.
+2026-11-18 21:27:44 | Iniciando W3SVC.
+2026-11-18 21:27:47 | OK HTTP 200 | http://10.0.2.10/ | Conteudo da CitizenTech confirmado.
+2026-11-18 21:28:44 | Iniciando pool CitizenTechPool.
+2026-11-18 21:28:44 | FALHA | The service cannot accept control messages at this time. (Exception from HRESULT: 0x80070425)
+2026-11-18 21:29:44 | Iniciando pool CitizenTechPool.
+2026-11-18 21:29:46 | OK HTTP 200 | http://10.0.2.10/ | Conteudo da CitizenTech confirmado.
+2026-11-18 21:30:47 | OK HTTP 200 | http://10.0.2.10/ | Conteudo da CitizenTech confirmado.
